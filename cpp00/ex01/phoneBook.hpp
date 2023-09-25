@@ -1,3 +1,6 @@
+#ifndef PHONE_BOOK_H
+# define PHONE_BOOK_H
+
 #include <string>
 #include <iostream>
 #include <cctype>
@@ -5,6 +8,8 @@
 
 class contact {
 	public:
+		contact(void);
+		~contact(void);
 		std::string firstName;
 		std::string lastName;
 		std::string nickname;
@@ -17,8 +22,11 @@ class phoneBook {
 	public:
 		void add();
 		void search();
-		void init();
+		phoneBook(void);
+		~phoneBook(void);
 	private:
 		int	nbr_de_contact;
 		contact contacts[8];
 };
+
+#endif

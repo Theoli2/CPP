@@ -1,4 +1,4 @@
-#include "./PhoneBook.hpp"
+#include "phoneBook.hpp"
 
 void phoneBook::add()
 {
@@ -20,7 +20,6 @@ void phoneBook::add()
 	{
 		if (this->contacts[i].firstName.empty())
 		{
-			std::cout << "lol" << std::endl;
 			this->nbr_de_contact += 1;
 			this->contacts[i] = new_contact;
 			break ;
@@ -39,6 +38,31 @@ void phoneBook::add()
 	}
 }
 
+phoneBook::phoneBook() : nbr_de_contact(0)
+{
+	std::cout << "Constructor called" << std::endl;
+	return ;
+}
+
+phoneBook::~phoneBook(void)
+{
+	std::cout << "Destructor called" << std::endl;
+	return ;
+}
+
+contact::contact(void)
+{
+	std::cout << "Constructor called" << std::endl;
+	return ;
+}
+
+contact::~contact(void)
+{
+	std::cout << "Destructor called" << std::endl;
+	return ;
+}
+
+
 std::string suitForDisplayString(std::string src)
 {
 	std::string dst;
@@ -53,14 +77,11 @@ std::string suitForDisplayString(std::string src)
 	return (dst);
 }
 
-void phoneBook::init()
-{
-	this->nbr_de_contact = 0;
-}
-
 void phoneBook::search()
 {
-	int	j;
+	std::string	input;
+	int j;
+
 	if (this->nbr_de_contact == 0)
 	{
 		std::cout << "Pas de contacts dans l'annuaire" << std::endl;
@@ -72,16 +93,24 @@ void phoneBook::search()
 	std::cout << std::setw(10) << std::right << "Nickname" << std::endl;
 	for (int i = -1; i < this->nbr_de_contact, i++;)
 	{
-		std::cout << std::setw(10) << std::right << i << "|" << "";
+		std::cout << std::setw(10) << std::right << i  + 1 << "|" << "";
 		std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].firstName) << "|" << "";
     	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].lastName) << "|" <<  "";
     	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].nickname) << std::endl;
 	}
-	std::cin >> j;
-	while (j < 0 && j > this->nbr_de_contact)
+	j = -1;
+	while (j < 0 || j >= this->nbr_de_contact)
 	{
-		std::cout << "(o_O) comment ca mon reuf ?" << std::endl;
-		std::cin >> j;
+		std::cout << "Type a contact's index: between 1 and " << this->nbr_de_contact << std::endl;
+		std::cin >> input;
+		try
+		{
+			j = std::stoi(input) - 1;
+			if (j >= 0 && j < this->nbr_de_contact)
+				break;
+		} catch (const std::invalid_argument& e) {
+			std::cout << "(o_O) comment ca mon reuf ?" << std::endl;
+		}
 	}
 	std::cout << "first name:" << this->contacts[j].firstName <<std::endl;
 	std::cout << "last name:" << this->contacts[j].lastName <<std::endl;
@@ -94,13 +123,11 @@ int main()
 {
 	std::string buffer;
 	phoneBook myPhoneBook;
-	
-	myPhoneBook.init();
+
 	while (buffer != "EXIT")
 	{
 		std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
 		std::cin >> buffer;
-		// std::cout << std::endl;
 		if (buffer == "ADD")
 		{
 			std::cout << "ADD" << std::endl;
