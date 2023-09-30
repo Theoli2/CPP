@@ -7,14 +7,39 @@ void phoneBook::add()
 	contact new_contact;
 	std::cout << "first name:" << std::endl;
 	std::cin >> new_contact.firstName;
+	if (new_contact.firstName.empty())
+	{
+		std::cout << "field can't be empty" << std::endl, NULL;
+		return ;
+	}
 	std::cout << "last name:" << std::endl;
 	std::cin >> new_contact.lastName;
+	if (new_contact.lastName.empty())
+	{
+		std::cout << "field can't be empty" << std::endl, NULL;
+		return ;
+	}
 	std::cout << "nickname:" << std::endl;
 	std::cin >> new_contact.nickname;
+	if (new_contact.nickname.empty())
+	{
+		std::cout << "field can't be empty" << std::endl, NULL;
+		return ;
+	}
 	std::cout << "phone number:" << std::endl;
 	std::cin >> new_contact.phoneNumber;
+	if (new_contact.phoneNumber.empty())
+	{
+		std::cout << "field can't be empty" << std::endl, NULL;
+		return ;
+	}
 	std::cout << "darkest secret:" << std::endl;
 	std::cin >> new_contact.darkestSecret;
+	if (new_contact.darkestSecret.empty())
+	{
+		std::cout << "field can't be empty" << std::endl, NULL;
+		return ;
+	}
 	i = 0;
 	while (i <= 7)
 	{
@@ -123,11 +148,13 @@ int main()
 {
 	std::string buffer;
 	phoneBook myPhoneBook;
+	int i = 1;
 
-	while (buffer != "EXIT")
+	std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
+	while (std::getline(std::cin, buffer))
 	{
-		std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
-		std::cin >> buffer;
+		if (i == 0)
+			std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
 		if (buffer == "ADD")
 		{
 			std::cout << "ADD" << std::endl;
@@ -138,6 +165,9 @@ int main()
 			std::cout << "SEARCH" << std::endl;
 			myPhoneBook.search();
 		}
+		if (buffer == "EXIT")
+			break;
+		i = 0;
 	}
 	std::cout << "EXIT" << std::endl;
 	return (0);
