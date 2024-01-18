@@ -3,7 +3,7 @@
 int	main()
 {
 	Zombie* pointertozombie = newZombie("Bozo");
-	randomChump("2pac");
+	randomChump("Random");
 	delete (pointertozombie);
 	return(0);
 }

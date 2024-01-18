@@ -3,64 +3,68 @@
 void phoneBook::add()
 {
 	int i;
+	static int last_index;
+	std::string input;
 
 	contact new_contact;
 	std::cout << "first name:" << std::endl;
-	std::cin >> new_contact.firstName;
-	if (new_contact.firstName.empty())
+	std::getline(std::cin, input); 
+	if (!std::cin)
+		exit(0);
+	new_contact.setfirstName(input);
+	std::cin.clear();
+	if (new_contact.getfirstName().empty())
 	{
 		std::cout << "field can't be empty" << std::endl, NULL;
 		return ;
 	}
 	std::cout << "last name:" << std::endl;
-	std::cin >> new_contact.lastName;
-	if (new_contact.lastName.empty())
+	std::getline(std::cin, input); 
+	if (!std::cin)
+		exit(0);
+	new_contact.setlastName(input);
+	std::cin.clear();
+	if (new_contact.getlastName().empty())
 	{
 		std::cout << "field can't be empty" << std::endl, NULL;
 		return ;
 	}
 	std::cout << "nickname:" << std::endl;
-	std::cin >> new_contact.nickname;
-	if (new_contact.nickname.empty())
+	std::getline(std::cin, input); 
+	if (!std::cin)
+		exit(0);
+	new_contact.setnickname(input);
+	if (new_contact.getnickname().empty())
 	{
 		std::cout << "field can't be empty" << std::endl, NULL;
 		return ;
 	}
 	std::cout << "phone number:" << std::endl;
-	std::cin >> new_contact.phoneNumber;
-	if (new_contact.phoneNumber.empty())
+	std::getline(std::cin, input); 
+	if (!std::cin)
+		exit(0);
+	new_contact.setphoneNumber(input);
+	if (new_contact.getphoneNumber().empty())
 	{
 		std::cout << "field can't be empty" << std::endl, NULL;
 		return ;
 	}
 	std::cout << "darkest secret:" << std::endl;
-	std::cin >> new_contact.darkestSecret;
-	if (new_contact.darkestSecret.empty())
+	std::getline(std::cin, input); 
+	if (!std::cin)
+		exit(0);
+	new_contact.setdarkestSecret(input);
+	if (new_contact.getdarkestSecret().empty())
 	{
 		std::cout << "field can't be empty" << std::endl, NULL;
 		return ;
 	}
-	i = 0;
-	while (i <= 7)
-	{
-		if (this->contacts[i].firstName.empty())
-		{
-			this->nbr_de_contact += 1;
-			this->contacts[i] = new_contact;
-			break ;
-		}
-		i++;
-	}
-	if (i == 7 && this->contacts[i].firstName.empty())
-	{
-		i = 0;
-		while (i < 7)
-		{
-			this->contacts[i] = this->contacts[i + 1];
-			i++;
-		}
-		this->contacts[i] = new_contact;
-	}
+	this->contacts[last_index] = new_contact;
+	if (nbr_de_contact  < 8)
+		nbr_de_contact++;
+	last_index++;
+	if (last_index > 7)
+		last_index = 0;
 }
 
 phoneBook::phoneBook() : nbr_de_contact(0)
@@ -74,19 +78,6 @@ phoneBook::~phoneBook(void)
 	std::cout << "Destructor called" << std::endl;
 	return ;
 }
-
-contact::contact(void)
-{
-	std::cout << "Constructor called" << std::endl;
-	return ;
-}
-
-contact::~contact(void)
-{
-	std::cout << "Destructor called" << std::endl;
-	return ;
-}
-
 
 std::string suitForDisplayString(std::string src)
 {
@@ -116,12 +107,12 @@ void phoneBook::search()
 	std::cout << std::setw(10) << std::right << "First Name" << "|";
 	std::cout << std::setw(10) << std::right << "Last Name" << "|";
 	std::cout << std::setw(10) << std::right << "Nickname" << std::endl;
-	for (int i = -1; i < this->nbr_de_contact, i++;)
+	for (int i = 0; i < this->nbr_de_contact; i++)
 	{
-		std::cout << std::setw(10) << std::right << i  + 1 << "|" << "";
-		std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].firstName) << "|" << "";
-    	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].lastName) << "|" <<  "";
-    	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].nickname) << std::endl;
+		std::cout << std::setw(10) << std::right << i + 1 << "|" << "";
+		std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].getfirstName()) << "|" << "";
+    	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].getlastName()) << "|" <<  "";
+    	std::cout << std::setw(10) << std::right << suitForDisplayString(this->contacts[i].getnickname()) << std::endl;
 	}
 	j = -1;
 	while (j < 0 || j >= this->nbr_de_contact)
@@ -136,12 +127,14 @@ void phoneBook::search()
 		} catch (const std::invalid_argument& e) {
 			std::cout << "(o_O) comment ca mon reuf ?" << std::endl;
 		}
+		if (!std::cin)
+			exit(0);
 	}
-	std::cout << "first name:" << this->contacts[j].firstName <<std::endl;
-	std::cout << "last name:" << this->contacts[j].lastName <<std::endl;
-	std::cout << "nickname:" << this->contacts[j].nickname <<std::endl;
-	std::cout << "phone number:" << this->contacts[j].phoneNumber <<std::endl;
-	std::cout << "darkest secret:" << this->contacts[j].darkestSecret <<std::endl;
+	std::cout << "first name:" << this->contacts[j].getfirstName() <<std::endl;
+	std::cout << "last name:" << this->contacts[j].getlastName() <<std::endl;
+	std::cout << "nickname:" << this->contacts[j].getnickname() <<std::endl;
+	std::cout << "phone number:" << this->contacts[j].getphoneNumber() <<std::endl;
+	std::cout << "darkest secret:" << this->contacts[j].getdarkestSecret() <<std::endl;
 }
 
 int main() 
@@ -153,6 +146,8 @@ int main()
 	std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
 	while (std::getline(std::cin, buffer))
 	{
+		if (!std::cin)
+			break;
 		if (i == 0)
 			std::cout << "entrez une commande : ADD: SEARCH: EXIT: ";
 		if (buffer == "ADD")

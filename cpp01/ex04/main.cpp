@@ -6,11 +6,25 @@
 
 int replace(std::ifstream &input, std::ofstream &output, std::string search, std::string replace)
 {
-	std::string line;
-	while (std::getline(input, line))
+	std::string file;
+	std::string tmp;
+	while (std::getline(input, tmp))
 	{
-		output << ((line == search) ? replace : line) << std::endl;
+		file += tmp;
+		file += "\n";
 	}
+    size_t pos = file.find(search);
+	if (search == replace)
+	{
+		std::cerr << "searched and replacement strings can't be the same" << std::endl;
+		return (1);
+	}
+	while (pos != std::string::npos)
+    {
+        file.replace(pos, search.length(), replace);
+		pos = file.find(search);
+	}
+    output << file << std::endl;
 	input.close();
 	output.close();
 	return 0;
