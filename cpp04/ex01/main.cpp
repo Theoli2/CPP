@@ -6,7 +6,7 @@
 /*   By: tlivroze <tlivroze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 20:24:58 by tlivroze          #+#    #+#             */
-/*   Updated: 2024/01/13 22:17:23 by tlivroze         ###   ########.fr       */
+/*   Updated: 2024/02/18 02:38:42 by tlivroze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ int main()
 	for (int i = 0; i < 10; i++)
 	{delete animals[i];}
 
-    Dog basic;
-    basic.setType("Original Dog");
+	std::cout << "ahah\n";
+
+    Animal *basic = new Dog();
+    basic->setType("Original Dog");
     {
-        Dog tmp = basic;
-        tmp.setType("Copied Dog"); 
+        Animal *tmp = basic;
+        tmp->setType("Copied Dog"); 
 
         // If the name of basic is still "Original Dog", the copy was deep.
         // If the name of basic is now "Copied Dog", the copy was shallow.
-        std::cout << "Name of basic: " << basic.getType() << std::endl;
+        std::cout << "Name of basic: " << basic->getType() << std::endl;
     }
+	delete basic;
 	return (0);
 }

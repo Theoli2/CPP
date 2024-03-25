@@ -6,7 +6,7 @@
 /*   By: tlivroze <tlivroze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 20:24:48 by tlivroze          #+#    #+#             */
-/*   Updated: 2024/01/13 22:43:03 by tlivroze         ###   ########.fr       */
+/*   Updated: 2024/02/18 02:29:31 by tlivroze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Dog::Dog()
 	this->_type = "Dog";
 }
 
-Dog::Dog(const Dog& obj)
+Dog::Dog(const Dog& obj) : Animal(obj)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	*this = obj;

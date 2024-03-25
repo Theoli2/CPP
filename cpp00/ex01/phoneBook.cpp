@@ -2,7 +2,6 @@
 
 void phoneBook::add()
 {
-	int i;
 	static int last_index;
 	std::string input;
 
@@ -15,7 +14,7 @@ void phoneBook::add()
 	std::cin.clear();
 	if (new_contact.getfirstName().empty())
 	{
-		std::cout << "field can't be empty" << std::endl, NULL;
+		std::cout << "field can't be empty" << std::endl;
 		return ;
 	}
 	std::cout << "last name:" << std::endl;
@@ -26,7 +25,7 @@ void phoneBook::add()
 	std::cin.clear();
 	if (new_contact.getlastName().empty())
 	{
-		std::cout << "field can't be empty" << std::endl, NULL;
+		std::cout << "field can't be empty" << std::endl;
 		return ;
 	}
 	std::cout << "nickname:" << std::endl;
@@ -36,7 +35,7 @@ void phoneBook::add()
 	new_contact.setnickname(input);
 	if (new_contact.getnickname().empty())
 	{
-		std::cout << "field can't be empty" << std::endl, NULL;
+		std::cout << "field can't be empty" << std::endl;
 		return ;
 	}
 	std::cout << "phone number:" << std::endl;
@@ -46,7 +45,7 @@ void phoneBook::add()
 	new_contact.setphoneNumber(input);
 	if (new_contact.getphoneNumber().empty())
 	{
-		std::cout << "field can't be empty" << std::endl, NULL;
+		std::cout << "field can't be empty" << std::endl;
 		return ;
 	}
 	std::cout << "darkest secret:" << std::endl;
@@ -56,7 +55,7 @@ void phoneBook::add()
 	new_contact.setdarkestSecret(input);
 	if (new_contact.getdarkestSecret().empty())
 	{
-		std::cout << "field can't be empty" << std::endl, NULL;
+		std::cout << "field can't be empty" << std::endl;
 		return ;
 	}
 	this->contacts[last_index] = new_contact;
@@ -121,11 +120,22 @@ void phoneBook::search()
 		std::cin >> input;
 		try
 		{
-			j = std::stoi(input) - 1;
+			std::istringstream iss(input);
+			if (!(iss >> j)) 
+			{
+				std::cerr << "Invalid number: \n";
+			} 
+			else 
+			{
+				j -= 1;
+			}
 			if (j >= 0 && j < this->nbr_de_contact)
 				break;
-		} catch (const std::invalid_argument& e) {
+		}
+		catch (const std::invalid_argument& e) 
+		{
 			std::cout << "(o_O) comment ca mon reuf ?" << std::endl;
+			exit(0);
 		}
 		if (!std::cin)
 			exit(0);

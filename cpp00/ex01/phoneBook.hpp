@@ -5,6 +5,9 @@
 #include <iostream>
 #include <cctype>
 #include <iomanip>
+#include <cstdlib>
+#include <sstream>
+
 
 class contact {
 	public:

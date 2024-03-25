@@ -6,7 +6,7 @@
 /*   By: tlivroze <tlivroze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:38:11 by tlivroze          #+#    #+#             */
-/*   Updated: 2023/12/04 23:04:09 by tlivroze         ###   ########.fr       */
+/*   Updated: 2023/12/08 23:19:58 by tlivroze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ Fixed &Fixed::operator*(const Fixed& obj)
 
 Fixed &Fixed::operator/(const Fixed& obj)
 {
-	this->_value /= obj.getRawBits();
+	this->_value /= obj.getRawBits() >> this->_bits;
 	return (*this);
 }
 

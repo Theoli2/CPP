@@ -6,7 +6,7 @@
 /*   By: tlivroze <tlivroze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 23:41:36 by tlivroze          #+#    #+#             */
-/*   Updated: 2023/12/05 19:56:53 by tlivroze         ###   ########.fr       */
+/*   Updated: 2023/12/13 00:29:51 by tlivroze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void ScavTrap::Attack(const std::string& target)
 {
 	if (_HP == 0 || _EP == 0)
 		return ;
-	std::cout << _Name <<" attacks : " << target <<" loses " << _AD << " HP." << std::endl;
+	std::cout << _Name <<" attacks with all its might ! " << target <<" loses " << _AD << " HP." << std::endl;
 	_EP -- ;
 }
 

@@ -37,13 +37,14 @@ int main(int ac, char **av){
 		return 1;
 	}
 	std::string filename = av[1];
-	std::ifstream input(filename);
+	std::ifstream input(filename.c_str());
 	if (!input.is_open())
 	{
 		std::cout << "File not found" << std::endl;
 		return 1;
 	}
-	std::ofstream output(filename + ".replace");
+	filename += ".replace";
+	std::ofstream output(filename.c_str());
 	if (!output.is_open())
 	{
 		std::cout << "File not found" << std::endl;

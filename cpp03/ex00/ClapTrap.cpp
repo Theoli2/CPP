@@ -6,7 +6,7 @@
 /*   By: tlivroze <tlivroze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 23:09:16 by tlivroze          #+#    #+#             */
-/*   Updated: 2023/12/05 19:23:48 by tlivroze         ###   ########.fr       */
+/*   Updated: 2023/12/13 00:26:05 by tlivroze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void ClapTrap::attack(const std::string& target)
 {
 	if (_HP == 0 || _EP == 0)
 		return ;
-	std::cout << _Name <<"attacks :" << target <<"loses" << _AD << "HP." << std::endl;
+	std::cout << _Name <<" attacks :" << target <<" loses " << _AD << " HP." << std::endl;
 	_EP -- ;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << _Name << "take " << amount << "damages" << std::endl;
+	std::cout << _Name << " take " << amount << " damages" << std::endl;
 	_HP = _HP - amount;
 }
 
@@ -61,6 +61,6 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_HP == 0 || _EP == 0)
 		return ;
-	std::cout << _Name << "heals itself. It gains" << amount << "HP." << std::endl;
+	std::cout << _Name << " heals itself. It gains " << amount << " HP." << std::endl;
 	_HP += amount;
 }
