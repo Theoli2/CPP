@@ -123,23 +123,43 @@ double Bitcoin::findRate(std::string date)
 	return closestRate;
 }
 
-void Bitcoin::printRes()
+void Bitcoin::printRes(std::string input)
 {
-	double res;
-	for (std::map<std::string, double>::iterator it = .begin(); it != _input.end(); ++it)
+	std::ifstream file(input.c_str());
+	std::string line;
+	if (!file.is_open())
+		throw std::runtime_error("Error: couldn't open " + input + ".");
+	int	i = 0;
+	while(std::getline(file, line)) 
 	{
-		try
+		++i;
+		if (pos == std::string::npos)
 		{
-			if (isValidDate(it->first) == false)
-				throw std::invalid_argument("Date is not valid");
-			isValidPrice(it->second);
-			res = findRate(it->first) * it->second;
-			std::cout << it->first << " => " << it->second << " = " << res << "\n";
+			map.insert(std::make_pair(line, -1));
 		}
-		catch(const std::exception& e)
+		else
 		{
-			std::cerr << e.what() << '\n';
+			std::istringstream iss(line.substr(pos + 1, line.length()));
+			double value;
+			iss >> value;
+			map.insert(std::make_pair(line.substr(0, pos), value));
 		}
-		
+	}
+
+	double res;
+	for (std::getline(file, line))
+	{
+		std::string::size_type pos = line.find('|');
+		if (pos == std::string::npos)
+		{
+			std::cerr << "Error: wrong line format."
+		}
+		else 
+		{
+			
+		}
+		// isValidPrice(->second);
+		// res = findRate(->first) * it->second;
+		// std::cout << it->first << " => " << it->second << " = " << res << "\n";
 	}
 }

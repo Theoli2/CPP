@@ -22,7 +22,7 @@ class Bitcoin
 		Bitcoin &operator=(const Bitcoin &other);
 		~Bitcoin();
 		void parse(const std::string input,const char sep, std::map<std::string, double>& map);
-		void printRes();
+		void printRes(std::string input);
 		double findRate(std::string date);
 	private:
 		std::map<std::string, double> _data;

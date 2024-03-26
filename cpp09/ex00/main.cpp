@@ -11,8 +11,8 @@ int main(int ac, char **av)
 	{	
 		try
 		{
-			Bitcoin btc = Bitcoin(av[1]);
-			btc.printRes();
+			Bitcoin btc = Bitcoin();
+			btc.printRes(av[1]);
 		}
 		catch(const std::exception& e)
 		{
